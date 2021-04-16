@@ -25,8 +25,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     [SerializeField]private float dumping=0.5f;
 
-    [SerializeField] private float maxSpeed=10;
-
     [SerializeField][Range(0,1)] private float midairMovementSpeed=1;
 
     public UnityEvent Shoot;
