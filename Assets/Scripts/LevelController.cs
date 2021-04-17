@@ -181,7 +181,7 @@ public class LevelController : MonoBehaviour
         {
             totalcount += ability.count;
         }
-        progress[currentLevel.id] = Mathf.Max(3-(currenLevel.goal-totalcount), 1);
+        progress[currentLevel.id] = Mathf.Max(3-(currentLevel.goal-totalcount), 1);
         SaveProgress();
         UpdateLevels();
         LevelEnd();

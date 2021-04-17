@@ -9,7 +9,7 @@ public class Level : ScriptableObject
     public List<PlayerCounts> playerCounts;
     public GameObject grid;
     
-    public int Goal=1;
+    public int goal=1;
 }
 
 [System.Serializable]
