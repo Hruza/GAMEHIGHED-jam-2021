@@ -416,14 +416,23 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 97c4cc1d360200143b37f9ea148bef58, type: 2}
   - {fileID: 11400000, guid: eb6d72d406f13bc45aed00fbebf0a873, type: 2}
+  - {fileID: 11400000, guid: cca5cf10ac41a9544814ef360d241485, type: 2}
+  - {fileID: 11400000, guid: fa3d4b6bb335b0e4885e68dff80602fa, type: 2}
   wholeMenu: {fileID: 437348199}
   menuPanel: {fileID: 1949477}
   choosePanel: {fileID: 1010541385}
   levelPanel: {fileID: 1365884439}
   levelScrollBarContent: {fileID: 779690561}
-  levelButton: {fileID: 3149505125945996428, guid: a226db7a140b8354ba9534a63e6c806c, type: 3}
+  levelButton: {fileID: 3149505125945996428, guid: 2fc5814e83bda6942b616bb1f8405192, type: 3}
   abilityButton: {fileID: 5248820188962368496, guid: 5661910b8bd44e5479cd9007cf0402b8, type: 3}
-  playerObject: {fileID: 5178933500679579206, guid: 4a952b338890f6c40bb22caa9820189d, type: 3}
+  playerPrefabs:
+  - player: {fileID: 5178933500679579206, guid: 4a952b338890f6c40bb22caa9820189d, type: 3}
+    ability: {fileID: 11400000, guid: ff821361efabeb743849e0b9cce6fd76, type: 2}
+  - player: {fileID: 7039074094488276707, guid: 51b1ad9e79b4f4645b3020976419d0ba, type: 3}
+    ability: {fileID: 11400000, guid: d500e0402ecc9a145917c6eb6c399fcd, type: 2}
+  - player: {fileID: 9026927477577882984, guid: 6f4b785804612be48956727ffdfa6a04, type: 3}
+    ability: {fileID: 11400000, guid: 9310df8e2c614484e86745fb87f99f13, type: 2}
+  levelTiles: []
 --- !u!114 &228265938
 MonoBehaviour:
   m_ObjectHideFlags: 0
