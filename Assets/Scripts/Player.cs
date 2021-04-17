@@ -29,9 +29,11 @@ public class Player : MonoBehaviour
 
     public event Action PlayerDiedCallback;
 
+    private Animator animator;
 
     private void Start()
     {
+        animator=GetComponent<Animator>();
         gridPosition = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
         facing = Dir.forward;
         SetupInput(InputSystem.devices.ToArray());
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Rotate(Dir direction)
     {
+        animator.SetBool("IsFalling",true);
         Quaternion targetRotation = Quaternion.identity;
         switch (direction)
         {
@@ -192,12 +195,13 @@ public class Player : MonoBehaviour
         moving = false;
         facing = direction;
         stepParticles.Play();
+        animator.SetBool("IsFalling",false);
         yield return null;
     }
 
     IEnumerator Move(Vector3Int direction)
     {
-
+        animator.SetBool("IsFalling",true);
         Vector3 from = transform.position;
 
         Vector3 position = transform.position;
@@ -216,7 +220,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Fall()
     {
-
+        animator.SetBool("IsFalling",true);
         Vector3 from = transform.position;
         for (float t = 0; t < 1; t += Time.fixedDeltaTime / fallTime)
         {
@@ -244,6 +248,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(Fall());
                 break;
             case Grid.TileType.tile:
+                animator.SetBool("IsFalling",false);
                 stepParticles.Play();
                 break;
             default:

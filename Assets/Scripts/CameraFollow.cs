@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+
+    public static CameraFollow instance;
+
     public Transform target;
 
     [SerializeField] private float rotationSpeed=1;
     [SerializeField] private float followSpeed=1;
+
+    private void Awake() {
+        instance=this;    
+    }
 
     private Vector3 targetPosition;
     void FixedUpdate()
