@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e762bb09ac1162468aab2510fef82c7, type: 3}
-  m_Name: Block
+  m_Script: {fileID: 11500000, guid: 39d988dea3ca5924fb97013869af6255, type: 3}
+  m_Name: NoAbility
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 269f9eca86f4751459556ba0c39e5502, type: 3}
-  tile: {fileID: 498615287365599551, guid: 92cbc65eac4700f42915c3ef471b5a7a, type: 3}
+  sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

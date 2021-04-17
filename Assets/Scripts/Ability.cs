@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class Ability : ScriptableObject
+[CreateAssetMenu(fileName = "NullAbility", menuName = "ScriptableObjects/Abilities/NullAbility")]
+public class Ability : ScriptableObject
 {
+    public Sprite sprite;
     public enum AbilityOutput{abilityFailed, abilityPerformed}
 
-    public abstract void Perform(Vector3Int position,Vector3Int facing,Action<AbilityOutput> AbilityCallback);
+    public virtual void Perform(Vector3Int position,Vector3Int facing,Action<AbilityOutput> AbilityCallback){
+        AbilityCallback(AbilityOutput.abilityFailed);
+    }
 }
