@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
 
     private int progressID;
 
-    void Update()
+    void Start()
     {
         if(PlayerPrefs.HasKey("progress"))
             PlayerPrefs.GetInt("progress");
