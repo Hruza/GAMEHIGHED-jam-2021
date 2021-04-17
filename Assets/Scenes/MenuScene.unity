@@ -418,6 +418,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb6d72d406f13bc45aed00fbebf0a873, type: 2}
   - {fileID: 11400000, guid: cca5cf10ac41a9544814ef360d241485, type: 2}
   - {fileID: 11400000, guid: fa3d4b6bb335b0e4885e68dff80602fa, type: 2}
+  - {fileID: 11400000, guid: e3bf81f0ce256d04e9925a33a742d2de, type: 2}
   wholeMenu: {fileID: 437348199}
   menuPanel: {fileID: 1949477}
   choosePanel: {fileID: 1010541385}
@@ -432,7 +433,6 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: d500e0402ecc9a145917c6eb6c399fcd, type: 2}
   - player: {fileID: 9026927477577882984, guid: 6f4b785804612be48956727ffdfa6a04, type: 3}
     ability: {fileID: 11400000, guid: 9310df8e2c614484e86745fb87f99f13, type: 2}
-  levelTiles: []
 --- !u!114 &228265938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,11 +1851,11 @@ MonoBehaviour:
   m_Content: {fileID: 779690563}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 5
   m_Viewport: {fileID: 1937709258}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 759120928}
@@ -2284,13 +2284,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.17017849, y: -0, z: -0, w: 0.98541325}
-  m_LocalPosition: {x: -0.25231433, y: 2.06, z: -4.13}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: -0.25231433, y: 3, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 153106567}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 19.596, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &1687258586
 MonoBehaviour:
   m_ObjectHideFlags: 0

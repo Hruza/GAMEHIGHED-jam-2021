@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour
 
     public List<PlayerPrefabs> playerPrefabs;
 
-    public GameObject[] levelTiles;
+    private GameObject[] levelTiles;
 
     [System.Serializable]
     public struct PlayerPrefabs
@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour
         foreach (Level level in levels)
         {
             GameObject button = Instantiate(levelButton, levelScrollBarContent.GetComponent<RectTransform>());
-            button.GetComponentInChildren<TextMeshProUGUI>().SetText("Level " + (level.id+1).ToString());
+            button.GetComponentInChildren<TextMeshProUGUI>().SetText("Level " + (level.id + 1).ToString());
             button.GetComponent<Button>().onClick.AddListener(delegate { SetLevel(level.id); });
             levelTiles[level.id] = button;
         }
@@ -170,7 +170,7 @@ public class LevelController : MonoBehaviour
         {
             Destroy(player);
         }
-        Cursor.visible=true;
+        Cursor.visible = true;
         state = State.inMenu;
     }
 
@@ -181,7 +181,7 @@ public class LevelController : MonoBehaviour
         {
             totalcount += ability.count;
         }
-        progress[currentLevel.id] = Mathf.Max(3-(currentLevel.goal-totalcount), 1);
+        progress[currentLevel.id] = Mathf.Max(Mathf.Max(3 - (currentLevel.goal - totalcount), 1), progress[currentLevel.id]);
         SaveProgress();
         UpdateLevels();
         LevelEnd();

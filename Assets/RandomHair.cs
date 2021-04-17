@@ -9,7 +9,7 @@ public class RandomHair : MonoBehaviour
     {
         int count = transform.childCount;
         int rng=Random.Range(0,count+1);
-        if(rng<count+1){
+        if(rng<count){
             transform.GetChild(rng).gameObject.SetActive(true);
         }
     }
