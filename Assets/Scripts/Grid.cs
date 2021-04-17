@@ -15,6 +15,14 @@ public class Grid : MonoBehaviour
         notifyTiles += tile.PlayerOnPosition;
     }
 
+    public void RemoveTile(Tile tile)
+    {
+        notifyTiles-=tile.PlayerOnPosition;
+        tiles.Remove(tile);
+        Destroy(tile.gameObject);
+    }
+
+
     public enum TileType { none, tile, barrier }
 
     public event Action<Vector3Int> notifyTiles;
@@ -23,9 +31,9 @@ public class Grid : MonoBehaviour
     {
         foreach (Tile tile in tiles)
         {
-            if (tile.position == position)
+            if (tile?.position == position)
             {
-                return TileType.tile;
+                return tile.type;
             }
         }
         return TileType.none;
@@ -34,7 +42,7 @@ public class Grid : MonoBehaviour
     public Tile GetTile(Vector3Int position){
         foreach (Tile tile in tiles)
         {
-            if (tile.position == position)
+            if (tile?.position == position)
             {
                 return tile;
             }

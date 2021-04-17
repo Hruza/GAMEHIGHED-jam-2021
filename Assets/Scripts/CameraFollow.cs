@@ -8,11 +8,14 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private float rotationSpeed=1;
     [SerializeField] private float followSpeed=1;
+
+    private Vector3 targetPosition;
     void FixedUpdate()
     {
         if(target!=null){
-        transform.position = Vector3.Lerp(transform.position,target.transform.position,followSpeed); 
-        transform.position=transform.position-(Vector3.up*transform.position.y);
+          targetPosition = new Vector3(target.position.x,Mathf.Max(Mathf.Floor(target.position.y),0),target.position.z);
+          transform.position = Vector3.Lerp(transform.position,targetPosition,followSpeed); 
+          transform.position = transform.position;
       //  transform.rotation = Quaternion.Lerp(transform.rotation,target.transform.rotation,rotationSpeed); 
         }
     }

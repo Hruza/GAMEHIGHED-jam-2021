@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
 
     private PlayerControls input;
 
+    public GameObject deathParticles;
+
     public void SetupInput(InputDevice device)
     {
         InputDevice[] deviceArray = new InputDevice[1];
@@ -134,11 +136,14 @@ public class Player : MonoBehaviour
 
                     if (Grid.instance.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) == Grid.TileType.tile)
                     {
-                        moving = true;
-                        StartCoroutine(Move(movementDirection + Vector3Int.up));
+                        if(Grid.instance.WhatIsThere(gridPosition + movementDirection + 2*Vector3Int.up) == Grid.TileType.none){
+                            moving = true;
+                            StartCoroutine(Move(movementDirection + Vector3Int.up));
+                        }
                     }
                     else if (Grid.instance.WhatIsThere(gridPosition + movementDirection) != Grid.TileType.barrier)
                     {
+                        Debug.Log(Grid.instance.WhatIsThere(gridPosition + movementDirection));
                         moving = true;
                         StartCoroutine(Move(movementDirection));
                     }
@@ -226,6 +231,11 @@ public class Player : MonoBehaviour
 
     private void ReachedTile(Vector3Int position)
     {
+        if (position.y < -3)
+        {
+            Die();
+            return;
+        }
         switch (Grid.instance.WhatIsThere(position))
         {
             case Grid.TileType.none:
@@ -239,15 +249,12 @@ public class Player : MonoBehaviour
                 break;
         }
         Grid.instance.PlayerIsHere(position);
-
-        if (position.y < -3)
-        {
-            Die();
-        }
     }
 
     private void Die(){
         Debug.Log("PlayerDied");
-        Destroy(this.gameObject);
+        Destroy(Instantiate(deathParticles,transform.position,Quaternion.identity),3);
+        gridPosition=Vector3Int.zero;
+        transform.position=Vector3.zero;
     }
 }

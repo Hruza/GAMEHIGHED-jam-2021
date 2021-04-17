@@ -13,6 +13,7 @@ public class TreeAbility : Ability
             target.TileAction(position);
             AbilityCallback(AbilityOutput.abilityPerformed);
         }
-        AbilityCallback(AbilityOutput.abilityFailed);
+        else
+            AbilityCallback(AbilityOutput.abilityFailed);
     }
 }
