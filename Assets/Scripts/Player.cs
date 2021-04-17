@@ -7,12 +7,13 @@ using UnityEngine.InputSystem.Utilities;
 using UnityEngine.Events;
 
 
-public class PlayerInputHandler2 : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Vector2 movementInput;
 
     private Vector3Int gridPosition;
 
+    private Ability ability;
 
     [SerializeField] private float turnTime = 0.5f;
     [SerializeField] private float fallTime = 0.25f;
@@ -22,8 +23,7 @@ public class PlayerInputHandler2 : MonoBehaviour
 
     private Rigidbody rb;
 
-
-    public UnityEvent Shoot;
+    public ParticleSystem stepParticles;
 
     public event Action<Vector3Int> reachedBlock;
 
@@ -54,10 +54,16 @@ public class PlayerInputHandler2 : MonoBehaviour
     {
         input = new PlayerControls();
         input.devices = new ReadOnlyArray<InputDevice>(devices);
-        input.Gameplay.Shoot.performed += ctx => Shoot.Invoke();
+        input.Gameplay.Shoot.performed += ctx => { if (!moving){ 
+                                                        moving=true;
+                                                        ability.Perform(gridPosition,DirToVector(facing),AbilityCallback);
+                                                        } };
         input.Gameplay.Enable();
     }
 
+    public void AbilityCallback(Ability.AbilityOutput output){
+
+    }
 
     Vector3 velocity;
     Vector3 refVelocity;
@@ -66,10 +72,31 @@ public class PlayerInputHandler2 : MonoBehaviour
 
     private Dir facing;
 
-    private bool walking = false;
+    private bool moving = false;
+
+    private Vector3Int DirToVector(Dir dir)
+    {
+        Vector3Int movementDirection = Vector3Int.zero;
+        switch (dir)
+        {
+            case Dir.forward:
+                movementDirection = Vector3Int.forward;
+                break;
+            case Dir.back:
+                movementDirection = Vector3Int.back;
+                break;
+            case Dir.left:
+                movementDirection = Vector3Int.left;
+                break;
+            case Dir.right:
+                movementDirection = Vector3Int.right;
+                break;
+        }
+        return movementDirection;
+    }
     private void FixedUpdate()
     {
-        if (!walking)
+        if (!moving)
         {
 
             movementInput = input.Gameplay.Move.ReadValue<Vector2>();
@@ -88,40 +115,31 @@ public class PlayerInputHandler2 : MonoBehaviour
             {
                 if (facing != inputDirection)
                 {
-                    walking = true;
+                    moving = true;
                     StartCoroutine(Rotate(inputDirection));
                 }
                 else
                 {
-                    Vector3Int movementDirection = Vector3Int.zero;
-                    switch (inputDirection)
-                    {
-                        case Dir.forward:
-                            movementDirection = Vector3Int.forward;
-                            break;
-                        case Dir.back:
-                            movementDirection = Vector3Int.back;
-                            break;
-                        case Dir.left:
-                            movementDirection = Vector3Int.left;
-                            break;
-                        case Dir.right:
-                            movementDirection = Vector3Int.right;
-                            break;
-                    }
+                    Vector3Int movementDirection = DirToVector(inputDirection);
+
                     if (Grid.instance.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) == Grid.TileType.tile)
                     {
-                        walking = true;
+                        moving = true;
                         StartCoroutine(Move(movementDirection + Vector3Int.up));
                     }
                     else if (Grid.instance.WhatIsThere(gridPosition + movementDirection) != Grid.TileType.barrier)
                     {
-                        walking = true;
+                        moving = true;
                         StartCoroutine(Move(movementDirection));
                     }
                 }
             }
         }
+    }
+
+    private void PlayerAction()
+    {
+
     }
 
     IEnumerator Rotate(Dir direction)
@@ -155,8 +173,9 @@ public class PlayerInputHandler2 : MonoBehaviour
         }
         transform.rotation = targetRotation;
         transform.position = position;
-        walking = false;
+        moving = false;
         facing = direction;
+        stepParticles.Play();
         yield return null;
     }
 
@@ -169,12 +188,12 @@ public class PlayerInputHandler2 : MonoBehaviour
         for (float t = 0; t < 1; t += Time.fixedDeltaTime / turnTime)
         {
             position = Vector3.Lerp(from, from + ((Vector3)direction * gridSize), t);
-            transform.position = new Vector3(position.x, from.y + (4 * t * (1 - t) * moveJumpHeight)+(Mathf.Sqrt(t)*direction.y), position.z);
+            transform.position = new Vector3(position.x, from.y + (4 * t * (1 - t) * moveJumpHeight) + (Mathf.Sqrt(t) * direction.y), position.z);
             yield return new WaitForFixedUpdate();
         }
         transform.position = from + ((Vector3)direction * gridSize);
         gridPosition = gridPosition + direction;
-        walking = false;
+        moving = false;
         ReachedTile(gridPosition);
         yield return null;
     }
@@ -190,24 +209,29 @@ public class PlayerInputHandler2 : MonoBehaviour
         }
         transform.position = from + Vector3.down;
         gridPosition = gridPosition + Vector3Int.down;
-        walking = false;
+        moving = false;
         ReachedTile(gridPosition);
         yield return null;
     }
 
-    private void ReachedTile(Vector3Int position){
+    private void ReachedTile(Vector3Int position)
+    {
         switch (Grid.instance.WhatIsThere(position))
         {
             case Grid.TileType.none:
-                walking = true;
+                moving = true;
                 StartCoroutine(Fall());
+                break;
+            case Grid.TileType.tile:
+                stepParticles.Play();
                 break;
             default:
                 break;
         }
         Grid.instance.PlayerIsHere(position);
-        
-        if(position.y<-3){
+
+        if (position.y < -3)
+        {
             Debug.Log("PlayerDied");
             Destroy(this.gameObject);
         }

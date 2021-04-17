@@ -31,6 +31,17 @@ public class Grid : MonoBehaviour
         return TileType.none;
     }
 
+    public Tile GetTile(Vector3Int position){
+        foreach (Tile tile in tiles)
+        {
+            if (tile.position == position)
+            {
+                return tile;
+            }
+        }
+        return null;
+    }
+
     public void PlayerIsHere(Vector3Int pos){
         notifyTiles.Invoke(pos);
     }
