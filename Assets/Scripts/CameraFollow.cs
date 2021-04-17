@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position,target.transform.position,followSpeed); 
-        transform.rotation = Quaternion.Lerp(transform.rotation,target.transform.rotation,rotationSpeed); 
+        transform.position=transform.position-(Vector3.up*transform.position.y);
+      //  transform.rotation = Quaternion.Lerp(transform.rotation,target.transform.rotation,rotationSpeed); 
     }
 }
