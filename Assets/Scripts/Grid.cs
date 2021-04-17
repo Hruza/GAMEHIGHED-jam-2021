@@ -1,8 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Grid : MonoBehaviour
 {
-    
+    static public Grid instance;
+
+    private List<Tile> tiles;
+
+    public void AddTile(Tile tile)
+    {
+        tiles.Add(tile);
+        notifyTiles += tile.PlayerOnPosition;
+    }
+
+    public enum TileType { none, tile, barrier }
+
+    public event Action<Vector3Int> notifyTiles;
+
+    public TileType WhatIsThere(Vector3Int position)
+    {
+        foreach (Tile tile in tiles)
+        {
+            if (tile.position == position)
+            {
+                return TileType.tile;
+            }
+        }
+        return TileType.none;
+    }
+
+    public void PlayerIsHere(Vector3Int pos){
+        notifyTiles.Invoke(pos);
+    }
+
+    private void Awake()
+    {
+        instance = this;
+        tiles = new List<Tile>();
+    }
 }

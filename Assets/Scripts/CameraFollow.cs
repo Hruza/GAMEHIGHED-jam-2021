@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -10,8 +10,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float followSpeed=1;
     void FixedUpdate()
     {
+        if(target!=null){
         transform.position = Vector3.Lerp(transform.position,target.transform.position,followSpeed); 
         transform.position=transform.position-(Vector3.up*transform.position.y);
       //  transform.rotation = Quaternion.Lerp(transform.rotation,target.transform.rotation,rotationSpeed); 
+        }
     }
 }

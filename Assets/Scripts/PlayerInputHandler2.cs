@@ -11,8 +11,11 @@ public class PlayerInputHandler2 : MonoBehaviour
 {
     private Vector2 movementInput;
 
+    private Vector3Int gridPosition;
+
 
     [SerializeField] private float turnTime = 0.5f;
+    [SerializeField] private float fallTime = 0.25f;
     [SerializeField] private float turnJumpHeight = 0.5f;
     [SerializeField] private float moveJumpHeight = 0.25f;
     [SerializeField] private float gridSize = 1f;
@@ -27,7 +30,8 @@ public class PlayerInputHandler2 : MonoBehaviour
 
     private void Start()
     {
-        facing=Dir.forward;
+        gridPosition = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+        facing = Dir.forward;
         Cursor.visible = false;
         SetupInput(InputSystem.devices.ToArray());
     }
@@ -62,7 +66,7 @@ public class PlayerInputHandler2 : MonoBehaviour
 
     private Dir facing;
 
-    private bool walking=false;
+    private bool walking = false;
     private void FixedUpdate()
     {
         if (!walking)
@@ -87,9 +91,34 @@ public class PlayerInputHandler2 : MonoBehaviour
                     walking = true;
                     StartCoroutine(Rotate(inputDirection));
                 }
-                else{
-                    walking=true;
-                    StartCoroutine(Move(inputDirection));
+                else
+                {
+                    Vector3Int movementDirection = Vector3Int.zero;
+                    switch (inputDirection)
+                    {
+                        case Dir.forward:
+                            movementDirection = Vector3Int.forward;
+                            break;
+                        case Dir.back:
+                            movementDirection = Vector3Int.back;
+                            break;
+                        case Dir.left:
+                            movementDirection = Vector3Int.left;
+                            break;
+                        case Dir.right:
+                            movementDirection = Vector3Int.right;
+                            break;
+                    }
+                    if (Grid.instance.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) == Grid.TileType.tile)
+                    {
+                        walking = true;
+                        StartCoroutine(Move(movementDirection + Vector3Int.up));
+                    }
+                    else if (Grid.instance.WhatIsThere(gridPosition + movementDirection) != Grid.TileType.barrier)
+                    {
+                        walking = true;
+                        StartCoroutine(Move(movementDirection));
+                    }
                 }
             }
         }
@@ -120,46 +149,67 @@ public class PlayerInputHandler2 : MonoBehaviour
 
         for (float t = 0; t < 1; t += Time.fixedDeltaTime / turnTime)
         {
-            transform.position = position + (Vector3.up * 4 * t * (1-t) * turnJumpHeight);
+            transform.position = position + (Vector3.up * 4 * t * (1 - t) * turnJumpHeight);
             transform.rotation = Quaternion.Lerp(from, targetRotation, t);
             yield return new WaitForFixedUpdate();
         }
         transform.rotation = targetRotation;
         transform.position = position;
         walking = false;
-        facing=direction;
+        facing = direction;
         yield return null;
     }
 
-    IEnumerator Move(Dir direction)
+    IEnumerator Move(Vector3Int direction)
     {
-        Vector3 movementDirection = Vector3.zero;
-        switch (direction)
-        {
-            case Dir.forward:
-                movementDirection = Vector3.forward;
-                break;
-            case Dir.back:
-                movementDirection = Vector3.back;
-                break;
-            case Dir.left:
-                movementDirection = Vector3.left;
-                break;
-            case Dir.right:
-                movementDirection = Vector3.right;
-                break;
-        }
+
         Vector3 from = transform.position;
 
-        Vector3 position=transform.position;
+        Vector3 position = transform.position;
         for (float t = 0; t < 1; t += Time.fixedDeltaTime / turnTime)
         {
-            position=Vector3.Lerp(from, from + (movementDirection*gridSize), t);
-            transform.position = new Vector3(position.x,from.y + ( 4 * t * (1-t) * moveJumpHeight),position.z);
+            position = Vector3.Lerp(from, from + ((Vector3)direction * gridSize), t);
+            transform.position = new Vector3(position.x, from.y + (4 * t * (1 - t) * moveJumpHeight)+(Mathf.Sqrt(t)*direction.y), position.z);
             yield return new WaitForFixedUpdate();
         }
-        transform.position = from + (movementDirection*gridSize);
+        transform.position = from + ((Vector3)direction * gridSize);
+        gridPosition = gridPosition + direction;
         walking = false;
+        ReachedTile(gridPosition);
         yield return null;
+    }
+
+    IEnumerator Fall()
+    {
+
+        Vector3 from = transform.position;
+        for (float t = 0; t < 1; t += Time.fixedDeltaTime / fallTime)
+        {
+            transform.position = new Vector3(from.x, from.y - t, from.z);
+            yield return new WaitForFixedUpdate();
+        }
+        transform.position = from + Vector3.down;
+        gridPosition = gridPosition + Vector3Int.down;
+        walking = false;
+        ReachedTile(gridPosition);
+        yield return null;
+    }
+
+    private void ReachedTile(Vector3Int position){
+        switch (Grid.instance.WhatIsThere(position))
+        {
+            case Grid.TileType.none:
+                walking = true;
+                StartCoroutine(Fall());
+                break;
+            default:
+                break;
+        }
+        Grid.instance.PlayerIsHere(position);
+        
+        if(position.y<-3){
+            Debug.Log("PlayerDied");
+            Destroy(this.gameObject);
+        }
     }
 }

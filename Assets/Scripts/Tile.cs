@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3Int position;
 
-    // Update is called once per frame
-    void Update()
+    public Grid.TileType type = Grid.TileType.tile;
+
+    void Awake()
     {
-        
+        position = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+    }
+    
+    private void Start() {
+        Grid.instance.AddTile(this);    
+    }
+    public virtual void PlayerOnPosition(Vector3Int pos)
+    {
+        return;
     }
 }
