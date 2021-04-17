@@ -27,12 +27,13 @@ public class Player : MonoBehaviour
 
     public event Action<Vector3Int> reachedBlock;
 
+    public event Action PlayerDiedCallback;
+
 
     private void Start()
     {
         gridPosition = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
         facing = Dir.forward;
-        Cursor.visible = false;
         SetupInput(InputSystem.devices.ToArray());
     }
     private void OnEnable()
@@ -252,9 +253,12 @@ public class Player : MonoBehaviour
     }
 
     private void Die(){
+        input.Dispose();
         Debug.Log("PlayerDied");
-        Destroy(Instantiate(deathParticles,transform.position,Quaternion.identity),3);
+        Destroy(Instantiate(deathParticles,transform.position,Quaternion.identity,LevelController.level.transform),3);
         gridPosition=Vector3Int.zero;
+        Destroy(this.gameObject);
         transform.position=Vector3.zero;
+        PlayerDiedCallback.Invoke();
     }
 }

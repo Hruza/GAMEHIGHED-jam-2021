@@ -11,7 +11,7 @@ public class BlockAbility : Ability
         Tile target = Grid.instance.GetTile(position);
         if (target != null && target.type == Grid.TileType.tile)
         {
-            Grid.instance.AddTile(Instantiate(tile,position + Vector3Int.up,Quaternion.identity).GetComponent<Tile>());
+            Grid.instance.AddTile(Instantiate(tile,position + Vector3Int.up,Quaternion.identity,LevelController.level.transform).GetComponent<Tile>());
             AbilityCallback(AbilityOutput.abilityPerformed);
         }
         else{

@@ -15,7 +15,7 @@ public class FragileTile : Tile
         }
         else if(activated){
             Grid.instance.RemoveTile(this);
-            Destroy(Instantiate(breakParticles,transform.position,transform.rotation),3);
+            Destroy(Instantiate(breakParticles,transform.position,transform.rotation,LevelController.level.transform),3);
         }
     }
 }

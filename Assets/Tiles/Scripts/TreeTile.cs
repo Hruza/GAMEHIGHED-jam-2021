@@ -21,8 +21,8 @@ public class TreeTile : Tile
             tree.rotation=Quaternion.Lerp(Quaternion.identity,toRotation,t);
             yield return new WaitForFixedUpdate();
         }
-        Grid.instance.AddTile(Instantiate(invisibleTile,position+dir,Quaternion.identity).GetComponent<Tile>());
-        Grid.instance.AddTile(Instantiate(invisibleTile,position+2*dir,Quaternion.identity).GetComponent<Tile>());
+        Grid.instance.AddTile(Instantiate(invisibleTile,position+dir,Quaternion.identity,LevelController.level.transform).GetComponent<Tile>());
+        Grid.instance.AddTile(Instantiate(invisibleTile,position+2*dir,Quaternion.identity,LevelController.level.transform).GetComponent<Tile>());
         yield return null;
     }
 }
