@@ -88,6 +88,7 @@ public class LevelController : MonoBehaviour
         player = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
         player.GetComponent<Player>().ability = ability;
         player.GetComponent<Player>().PlayerDiedCallback += PlayerDied;
+        CameraFollow.instance.target=player.transform;
         for (int i = 0; i < abilityPool.Count; i++)
         {
             if (abilityPool[i].ability == ability)
