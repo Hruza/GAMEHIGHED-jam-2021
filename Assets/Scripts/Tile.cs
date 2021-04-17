@@ -6,11 +6,18 @@ public class Tile : MonoBehaviour
 {
     public Vector3Int position;
 
+    public enum Interaction{none, tree, destroyable}
+
+    public Interaction interaction;
     public Grid.TileType type = Grid.TileType.tile;
 
     void Awake()
     {
         position = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+    }
+
+    public virtual void TileAction(Vector3Int from){
+
     }
     
     private void Start() {

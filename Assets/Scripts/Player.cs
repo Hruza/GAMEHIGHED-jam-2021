@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private Vector3Int gridPosition;
 
-    private Ability ability;
+    public Ability ability;
 
     [SerializeField] private float turnTime = 0.5f;
     [SerializeField] private float fallTime = 0.25f;
@@ -62,7 +62,17 @@ public class Player : MonoBehaviour
     }
 
     public void AbilityCallback(Ability.AbilityOutput output){
+        Debug.Log(output);
+        switch (output)
+        {
+            case Ability.AbilityOutput.abilityPerformed:
+                Die();
+                break;
+            default:
 
+                break;
+        }
+        moving=false;
     }
 
     Vector3 velocity;
@@ -232,8 +242,12 @@ public class Player : MonoBehaviour
 
         if (position.y < -3)
         {
-            Debug.Log("PlayerDied");
-            Destroy(this.gameObject);
+            Die();
         }
+    }
+
+    private void Die(){
+        Debug.Log("PlayerDied");
+        Destroy(this.gameObject);
     }
 }
