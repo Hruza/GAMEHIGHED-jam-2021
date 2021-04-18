@@ -1265,22 +1265,6 @@ MonoBehaviour:
     m_Y: 90
     m_Width: 39
     m_Height: 4
-  - m_X: 699
-    m_Y: 94
-    m_Width: 43
-    m_Height: 71
-  - m_X: 703
-    m_Y: 94
-    m_Width: 39
-    m_Height: 929
-  - m_X: 978
-    m_Y: 179
-    m_Width: 45
-    m_Height: 844
-  - m_X: 703
-    m_Y: 183
-    m_Width: 196
-    m_Height: 840
   - m_X: 571
     m_Y: 92
     m_Width: 7
@@ -1289,13 +1273,85 @@ MonoBehaviour:
     m_Y: 180
     m_Width: 58
     m_Height: 1
+  - m_X: 140
+    m_Y: 249
+    m_Width: 35
+    m_Height: 23
+  - m_X: 494
+    m_Y: 182
+    m_Width: 7
+    m_Height: 89
+  - m_X: 425
+    m_Y: 252
+    m_Width: 3
+    m_Height: 19
+  - m_X: 228
+    m_Y: 311
+    m_Width: 58
+    m_Height: 33
+  - m_X: 283
+    m_Y: 272
+    m_Width: 3
+    m_Height: 72
+  - m_X: 66
+    m_Y: 274
+    m_Width: 5
+    m_Height: 65
+  - m_X: 0
+    m_Y: 453
+    m_Width: 1023
+    m_Height: 570
+  - m_X: 357
+    m_Y: 253
+    m_Width: 2
+    m_Height: 92
+  - m_X: 324
+    m_Y: 344
+    m_Width: 35
+    m_Height: 1
+  - m_X: 121
+    m_Y: 339
+    m_Width: 19
+    m_Height: 24
+  - m_X: 192
+    m_Y: 433
+    m_Width: 831
+    m_Height: 590
+  - m_X: 192
+    m_Y: 363
+    m_Width: 36
+    m_Height: 660
+  - m_X: 699
+    m_Y: 134
+    m_Width: 43
+    m_Height: 31
+  - m_X: 773
+    m_Y: 183
+    m_Width: 126
+    m_Height: 840
+  - m_X: 703
+    m_Y: 134
+    m_Width: 39
+    m_Height: 49
+  - m_X: 739
+    m_Y: 94
+    m_Width: 3
+    m_Height: 89
+  - m_X: 0
+    m_Y: 431
+    m_Width: 66
+    m_Height: 592
+  - m_X: 62
+    m_Y: 363
+    m_Width: 4
+    m_Height: 660
   - m_X: 580
     m_Y: 180
     m_Width: 49
     m_Height: 843
   - m_X: 580
     m_Y: 258
-    m_Width: 319
+    m_Width: 33
     m_Height: 765
   - m_X: 436
     m_Y: 272
