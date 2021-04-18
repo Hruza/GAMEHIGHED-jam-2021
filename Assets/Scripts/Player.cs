@@ -137,17 +137,17 @@ public class Player : MonoBehaviour
                 else
                 {
                     Vector3Int movementDirection = DirToVector(inputDirection);
-
-                    if (Grid.instance.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) == Grid.TileType.tile)
+                    Grid grid=Grid.instance;
+                    if (grid.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) == Grid.TileType.tile )
                     {
-                        if(Grid.instance.WhatIsThere(gridPosition + movementDirection + 2*Vector3Int.up) == Grid.TileType.none){
+                        if(grid.WhatIsThere(gridPosition + movementDirection + 2*Vector3Int.up) == Grid.TileType.none && grid.WhatIsThere(gridPosition + (2* Vector3Int.up)) == Grid.TileType.none){
                             moving = true;
                             StartCoroutine(Move(movementDirection + Vector3Int.up));
                         }
                     }
-                    else if (Grid.instance.WhatIsThere(gridPosition + movementDirection) != Grid.TileType.barrier)
+                    else if (grid.WhatIsThere(gridPosition + movementDirection) != Grid.TileType.barrier && grid.WhatIsThere(gridPosition + movementDirection + Vector3Int.up) != Grid.TileType.barrier)
                     {
-                        Debug.Log(Grid.instance.WhatIsThere(gridPosition + movementDirection));
+                        Debug.Log(grid.WhatIsThere(gridPosition + movementDirection));
                         moving = true;
                         StartCoroutine(Move(movementDirection));
                     }

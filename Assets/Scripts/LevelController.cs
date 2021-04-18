@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour
     public GameObject wholeMenu;
     public GameObject menuPanel;
     public GameObject choosePanel;
+    public RectTransform chooseSubPanel;
     public GameObject levelPanel;
     public GameObject levelScrollBarContent;
     public GameObject levelButton;
@@ -77,6 +78,7 @@ public class LevelController : MonoBehaviour
         currentLevel = levels.Find(x => x.id == id);
         abilityPool = new List<PlayerCounts>(currentLevel.playerCounts);
         level = Instantiate(currentLevel.grid, Vector3.zero, Quaternion.identity);
+        CameraFollow.instance.target = level.transform;
         DrawAbilities();
     }
 
@@ -89,7 +91,7 @@ public class LevelController : MonoBehaviour
         state = State.choosing;
         Cursor.visible = true;
 
-        foreach (Transform child in choosePanel.transform)
+        foreach (Transform child in chooseSubPanel)
         {
             Destroy(child.gameObject);
         }
@@ -98,9 +100,10 @@ public class LevelController : MonoBehaviour
         {
             if (ability.count > 0)
             {
-                GameObject button = Instantiate(abilityButton, choosePanel.transform);
-                button.GetComponentInChildren<TextMeshProUGUI>().SetText(ability.count.ToString());
+                GameObject button = Instantiate(abilityButton, chooseSubPanel);
+                button.GetComponentInChildren<AbilityButton>().SetAbility(ability);
                 button.GetComponent<Button>().onClick.AddListener(delegate { SelectAbility(ability.ability); });
+                if(currentLevel.id==0 && totalcount>0 && ability.ability.name=="NoAbility") button.GetComponent<Button>().interactable=false;
                 totalcount += ability.count;
             }
         }
