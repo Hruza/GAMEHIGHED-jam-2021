@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1227837513007125308}
   - component: {fileID: 8484942319804369724}
   - component: {fileID: 5584345845943148872}
+  - component: {fileID: 3296734806718273473}
+  - component: {fileID: 8545875594534712714}
   m_Layer: 5
   m_Name: AbilityButton
   m_TagString: Untagged
@@ -137,6 +139,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counter: {fileID: 8007464060301591350}
   image: {fileID: 4493787713758983984}
+--- !u!114 &3296734806718273473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248820188962368496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8545875594534712714}
+          m_TargetAssemblyTypeName: Tooltip, Assembly-CSharp
+          m_MethodName: OnMouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8545875594534712714}
+          m_TargetAssemblyTypeName: Tooltip, Assembly-CSharp
+          m_MethodName: OnMouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &8545875594534712714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248820188962368496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d140e36a534b2146b798326bc8ca8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  tooltip: {fileID: 9055344527413854988, guid: ae0b26ff852fe624292994e008ae387c, type: 3}
 --- !u!1 &8028228111499159948
 GameObject:
   m_ObjectHideFlags: 0

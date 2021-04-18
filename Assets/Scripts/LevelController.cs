@@ -97,6 +97,9 @@ public class LevelController : MonoBehaviour
             showingPauseMenu = !showingPauseMenu;
             pauseMenu.SetActive(showingPauseMenu);
         }
+        else if(state==State.inMenu){
+            ReturnToMenuPressed();
+        }
     }
 
     void SetLevel(int id)
@@ -131,6 +134,7 @@ public class LevelController : MonoBehaviour
                 GameObject button = Instantiate(abilityButton, chooseSubPanel);
                 button.GetComponentInChildren<AbilityButton>().SetAbility(ability);
                 button.GetComponent<Button>().onClick.AddListener(delegate { SelectAbility(ability.ability); });
+                button.GetComponent<Tooltip>().text=ability.ability.tooltip;
                 if(currentLevel.id==0 && totalcount>0 && ability.ability.name=="NoAbility") button.GetComponent<Button>().interactable=false;
                 totalcount += ability.count;
             }
@@ -170,14 +174,17 @@ public class LevelController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void ClearAndRetryLevelPressed()
+    public void ClearAndRetryLevelPressed(bool restart)
     {
         Destroy(level);
         Destroy(player);
         HideAllPanels();
         wholeMenu.SetActive(true);
         Cursor.visible=true;
-        RetryLevelPressed();
+        if(restart)
+            RetryLevelPressed();
+        else
+            ReturnToMenuPressed();
     }
 
     public void RetryLevelPressed()
@@ -204,6 +211,7 @@ public class LevelController : MonoBehaviour
 
     public void ReturnToMenuPressed()
     {
+        state=State.inMenu;
         HideAllPanels();
         menuPanel.SetActive(true);
     }

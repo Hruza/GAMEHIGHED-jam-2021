@@ -6,6 +6,8 @@ using System;
 [CreateAssetMenu(fileName = "NullAbility", menuName = "ScriptableObjects/Abilities/NullAbility")]
 public class Ability : ScriptableObject
 {
+    public string tooltip;
+
     public Sprite sprite;
     public enum AbilityOutput{abilityFailed, abilityPerformed}
 

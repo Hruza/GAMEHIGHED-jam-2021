@@ -19,8 +19,9 @@ public class AudioManager : MonoBehaviour
     }
 
     static public void Play(string name) {
-        Sound sound =Array.Find<Sound>(instance.sounds,x => x.soundName==name);
-        sound.source.Play();
+        Sound[] sounds =Array.FindAll<Sound>(instance.sounds,x => x.soundName==name);
+        int i = UnityEngine.Random.Range(0,sounds.Length);
+        sounds[i].source.Play();
     }
 
     public void UpdateMusicVolume(float value){

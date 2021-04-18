@@ -201,6 +201,7 @@ public class Player : MonoBehaviour
         moving = false;
         facing = direction;
         stepParticles.Play();
+        AudioManager.Play("step");
         animator.SetBool("IsFalling",false);
         yield return null;
     }
@@ -256,6 +257,7 @@ public class Player : MonoBehaviour
             case Grid.TileType.tile:
                 animator.SetBool("IsFalling",false);
                 stepParticles.Play();
+                AudioManager.Play("step");
                 break;
             default:
                 break;
@@ -264,6 +266,7 @@ public class Player : MonoBehaviour
     }
 
     private void Die(){
+        AudioManager.Play("crush");
         input.Dispose();
         Debug.Log("PlayerDied");
         Destroy(Instantiate(deathParticles,transform.position,Quaternion.identity,LevelController.level.transform),3);

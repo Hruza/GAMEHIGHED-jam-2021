@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0906dd7194890442a504bd90159b72d, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
+  tooltip: Breaks wall in front of the player.
   sprite: {fileID: 21300000, guid: 3b959b531362d1441a8beb24d6e2cf36, type: 3}
