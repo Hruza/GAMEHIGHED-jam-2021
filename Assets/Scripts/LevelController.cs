@@ -16,6 +16,7 @@ public class LevelController : MonoBehaviour
     public GameObject menuPanel;
     public GameObject choosePanel;    
     public GameObject finishPanel;
+    public GameObject failPanel;
     public GameObject creditsPanel;
     public RectTransform chooseSubPanel;
     public GameObject levelPanel;
@@ -49,6 +50,8 @@ public class LevelController : MonoBehaviour
         levelPanel.SetActive(false);
         choosePanel.SetActive(false);
         finishPanel.SetActive(false);
+        failPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
     void Start()
     {
@@ -145,6 +148,11 @@ public class LevelController : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void RetryLevelPressed()
+    {
+        SetLevel(currentLevel.id);
+    }
+
     public void StartPressed()
     {
         HideAllPanels();
@@ -177,16 +185,20 @@ public class LevelController : MonoBehaviour
         Destroy(level);
         HideAllPanels();
         wholeMenu.SetActive(true);
-        finishPanel.SetActive(true);
-        string victory = (stars > 0 ) ? "VICTORY" : "DEFEAT";
+        
         if(stars==0){
-            AudioManager.Play("Lost");
+            failPanel.SetActive(true);
+            AudioManager.Play("Lost");            
+            failPanel.GetComponent<FinishText>().changeText("LEVEL " + (currentLevel.id + 1).ToString());
+            failPanel.GetComponent<LevelTile>().SetStarCount(stars);
         }
         else{
+            finishPanel.SetActive(true);
             AudioManager.Play("Victory");
+            finishPanel.GetComponent<FinishText>().changeText("LEVEL " + (currentLevel.id + 1).ToString());
+            finishPanel.GetComponent<LevelTile>().SetStarCount(stars);
         }
-        finishPanel.GetComponent<FinishText>().changeText(victory, "LEVEL " + (currentLevel.id + 1).ToString());
-        finishPanel.GetComponent<LevelTile>().SetStarCount(stars);
+        
         if (player != null)
         {
             Destroy(player);

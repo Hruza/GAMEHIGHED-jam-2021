@@ -5,12 +5,10 @@ using TMPro;
 
 public class FinishText : MonoBehaviour
 {
-    public TextMeshProUGUI title;
     public TextMeshProUGUI level;
 
-    public void changeText(string titleText, string levelText)
+    public void changeText(string levelText)
     {
-        title.SetText(titleText);
         level.SetText(levelText);
     }
 }
