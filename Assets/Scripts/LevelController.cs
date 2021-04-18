@@ -14,7 +14,8 @@ public class LevelController : MonoBehaviour
     public List<Level> levels;
     public GameObject wholeMenu;
     public GameObject menuPanel;
-    public GameObject choosePanel;
+    public GameObject choosePanel;    
+    public GameObject finishPanel;
     public RectTransform chooseSubPanel;
     public GameObject levelPanel;
     public GameObject levelScrollBarContent;
@@ -46,6 +47,7 @@ public class LevelController : MonoBehaviour
         menuPanel.SetActive(false);
         levelPanel.SetActive(false);
         choosePanel.SetActive(false);
+        finishPanel.SetActive(false);
     }
     void Start()
     {
@@ -109,7 +111,7 @@ public class LevelController : MonoBehaviour
         }
         if (totalcount == 0)
         {
-            LevelEnd();
+            LevelEnd(0);
         }
     }
 
@@ -163,18 +165,27 @@ public class LevelController : MonoBehaviour
         DrawAbilities();
     }
 
-    public void LevelEnd()
+    public void LevelEnd(int stars)
     {
         Destroy(level);
         HideAllPanels();
         wholeMenu.SetActive(true);
-        levelPanel.SetActive(true);
+        finishPanel.SetActive(true);
+        string victory = (stars > 0 ) ? "VICTORY" : "DEFEAT";
+        finishPanel.GetComponent<FinishText>().changeText(victory, "LEVEL " + (currentLevel.id + 1).ToString());
+        finishPanel.GetComponent<LevelTile>().SetStarCount(stars);
         if (player != null)
         {
             Destroy(player);
         }
         Cursor.visible = true;
         state = State.inMenu;
+    }
+
+    public void FinishOKPressed()
+    {
+        HideAllPanels();
+        levelPanel.SetActive(true);
     }
 
     public void Win()
@@ -184,10 +195,11 @@ public class LevelController : MonoBehaviour
         {
             totalcount += ability.count;
         }
-        progress[currentLevel.id] = Mathf.Max(Mathf.Max(3 - (currentLevel.goal - totalcount), 1), progress[currentLevel.id]);
+        int starCount = Mathf.Max(Mathf.Max(3 - (currentLevel.goal - totalcount), 1), progress[currentLevel.id]);
+        progress[currentLevel.id] = starCount;
         SaveProgress();
         UpdateLevels();
-        LevelEnd();
+        LevelEnd(starCount);
     }
 
     public int[] LoadProgress(string filePath = "saves/progress.dat")
