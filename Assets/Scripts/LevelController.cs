@@ -179,6 +179,12 @@ public class LevelController : MonoBehaviour
         wholeMenu.SetActive(true);
         finishPanel.SetActive(true);
         string victory = (stars > 0 ) ? "VICTORY" : "DEFEAT";
+        if(stars==0){
+            AudioManager.Play("Lost");
+        }
+        else{
+            AudioManager.Play("Victory");
+        }
         finishPanel.GetComponent<FinishText>().changeText(victory, "LEVEL " + (currentLevel.id + 1).ToString());
         finishPanel.GetComponent<LevelTile>().SetStarCount(stars);
         if (player != null)
