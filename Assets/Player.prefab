@@ -5803,7 +5803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 9310df8e2c614484e86745fb87f99f13, type: 2}
-  turnTime: 0.5
+  turnTime: 0.4
   fallTime: 0.25
   turnJumpHeight: 0.5
   moveJumpHeight: 0.25

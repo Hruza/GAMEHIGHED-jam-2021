@@ -35,10 +35,15 @@ public class Player : MonoBehaviour
     {
         animator=GetComponent<Animator>();
         gridPosition = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
-        ReachedTile(gridPosition);
         facing = Dir.forward;
+        ReachedTile(gridPosition);
         SetupInput(InputSystem.devices.ToArray());
     }
+
+    private void OnDestroy() {
+        input.Dispose();
+    }
+
     private void OnEnable()
     {
         //initialize local variables

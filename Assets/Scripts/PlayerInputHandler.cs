@@ -57,7 +57,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         input = new PlayerControls();
         input.devices = new ReadOnlyArray<InputDevice>(devices);
-        input.Gameplay.Jump.performed += ctx => Jump();
         input.Gameplay.Shoot.performed += ctx => Shoot.Invoke();
         input.Gameplay.Enable();
     }
@@ -99,7 +98,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         // reading input and setting horizontal velocity
         movementInput = input.Gameplay.Move.ReadValue<Vector2>();
-        turnInput = Mathf.Clamp(input.Gameplay.Turn.ReadValue<float>()*turnSpeed,-maxTurn,maxTurn);
 
         if (jumpsSinceGrounded == 0)
             velocity = transform.rotation*(new Vector3(movementInput.x * movementSpeed,rb.velocity.y, movementSpeed*movementInput.y));
@@ -109,6 +107,5 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         rb.velocity = Vector3.Lerp(rb.velocity,velocity,dumping);
-        transform.Rotate(Vector3.up*turnInput,Space.World);
     }
 }

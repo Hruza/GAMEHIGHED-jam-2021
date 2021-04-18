@@ -7,6 +7,8 @@ using TMPro;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class LevelController : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class LevelController : MonoBehaviour
     public GameObject failPanel;
     public GameObject creditsPanel;
     public RectTransform chooseSubPanel;
+    public GameObject pauseMenu;
     public GameObject levelPanel;
     public GameObject levelScrollBarContent;
     public GameObject levelButton;
@@ -37,6 +40,10 @@ public class LevelController : MonoBehaviour
 
     private GameObject[] levelTiles;
 
+    private PlayerControls input;
+
+    private bool showingPauseMenu;
+
     [System.Serializable]
     public struct PlayerPrefabs
     {
@@ -52,9 +59,17 @@ public class LevelController : MonoBehaviour
         finishPanel.SetActive(false);
         failPanel.SetActive(false);
         creditsPanel.SetActive(false);
+        pauseMenu.SetActive(false);
+        showingPauseMenu=false;
     }
+
+    
     void Start()
     {
+        input=new PlayerControls();
+        input.Menu.Back.performed+= ctx => Back();    
+        input.Enable();
+
         instance = this;
         progress = LoadProgress();
         levelTiles = new GameObject[levels.Count];
@@ -74,6 +89,13 @@ public class LevelController : MonoBehaviour
         {
             levelTiles[i].GetComponent<LevelTile>().SetStarCount(progress[i]);
             levelTiles[i].GetComponent<Button>().interactable = (i > 0) ? (progress[i - 1] > 0) : true;
+        }
+    }
+
+    public void Back(){
+        if(state==State.inGame || state == State.choosing){
+            showingPauseMenu = !showingPauseMenu;
+            pauseMenu.SetActive(showingPauseMenu);
         }
     }
 
@@ -146,6 +168,16 @@ public class LevelController : MonoBehaviour
         }
         choosePanel.SetActive(false);
         Cursor.visible = false;
+    }
+
+    public void ClearAndRetryLevelPressed()
+    {
+        Destroy(level);
+        Destroy(player);
+        HideAllPanels();
+        wholeMenu.SetActive(true);
+        Cursor.visible=true;
+        RetryLevelPressed();
     }
 
     public void RetryLevelPressed()
