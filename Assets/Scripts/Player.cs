@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     {
         animator=GetComponent<Animator>();
         gridPosition = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+        ReachedTile(gridPosition);
         facing = Dir.forward;
         SetupInput(InputSystem.devices.ToArray());
     }

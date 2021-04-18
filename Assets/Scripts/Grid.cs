@@ -15,11 +15,11 @@ public class Grid : MonoBehaviour
         notifyTiles += tile.PlayerOnPosition;
     }
 
-    public void RemoveTile(Tile tile)
+    public void RemoveTile(Tile tile,bool destroy=true)
     {
         notifyTiles-=tile.PlayerOnPosition;
         tiles.Remove(tile);
-        Destroy(tile.gameObject);
+        if(destroy) Destroy(tile.gameObject);
     }
 
 

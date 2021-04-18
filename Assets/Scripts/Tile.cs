@@ -27,4 +27,8 @@ public class Tile : MonoBehaviour
     {
         return;
     }
+
+    private void OnDisable() {
+        Grid.instance.RemoveTile(this,false);
+    }
 }
