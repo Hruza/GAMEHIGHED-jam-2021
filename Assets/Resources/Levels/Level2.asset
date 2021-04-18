@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   playerCounts:
-  - count: 1
-    ability: {fileID: 11400000, guid: d500e0402ecc9a145917c6eb6c399fcd, type: 2}
+  - count: 7
+    ability: {fileID: 11400000, guid: 9310df8e2c614484e86745fb87f99f13, type: 2}
   - count: 1
     ability: {fileID: 11400000, guid: ff821361efabeb743849e0b9cce6fd76, type: 2}
-  grid: {fileID: 2797272239080507027, guid: cda1644f3b056cb4fa54f209dc677d60, type: 3}
+  grid: {fileID: 2797272239080507027, guid: 9712e2f4514145441bf39a42e3ae191d, type: 3}
+  goal: 1
