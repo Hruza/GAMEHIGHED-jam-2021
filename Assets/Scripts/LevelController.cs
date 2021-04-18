@@ -16,6 +16,7 @@ public class LevelController : MonoBehaviour
     public GameObject menuPanel;
     public GameObject choosePanel;    
     public GameObject finishPanel;
+    public GameObject creditsPanel;
     public RectTransform chooseSubPanel;
     public GameObject levelPanel;
     public GameObject levelScrollBarContent;
@@ -157,9 +158,15 @@ public class LevelController : MonoBehaviour
 
     public void CreditsPressed()
     {
-        Debug.LogError("NOT IMPLEMENTED CREDITS YET");
+        HideAllPanels();
+        creditsPanel.SetActive(true);
     }
 
+    public void ReturnToMenuPressed()
+    {
+        HideAllPanels();
+        menuPanel.SetActive(true);
+    }
     public void PlayerDied()
     {
         DrawAbilities();
