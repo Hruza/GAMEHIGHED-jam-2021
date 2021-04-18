@@ -220,8 +220,8 @@ public class LevelController : MonoBehaviour
         {
             totalcount += ability.count;
         }
-        int starCount = Mathf.Max(Mathf.Max(3 - (currentLevel.goal - totalcount), 1), progress[currentLevel.id]);
-        progress[currentLevel.id] = starCount;
+        int starCount = Mathf.Clamp(3 - (currentLevel.goal - totalcount), 1,3);
+        progress[currentLevel.id] = Mathf.Max(starCount, Mathf.Min(progress[currentLevel.id],3));;
         SaveProgress();
         UpdateLevels();
         LevelEnd(starCount);
