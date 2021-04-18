@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4731247219139638123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -169,8 +169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -69.8}
-  m_SizeDelta: {x: -998.73, y: -607.24}
+  m_AnchoredPosition: {x: 0, y: -75.942474}
+  m_SizeDelta: {x: -998.73, y: -620.4387}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8605824629640163250
 CanvasRenderer:
@@ -250,12 +250,12 @@ GameObject:
   - component: {fileID: 3308695965820096825}
   - component: {fileID: 3887019886440913917}
   m_Layer: 5
-  m_Name: FinishScreen 2
+  m_Name: FinishScreen 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4877538443151973849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4877538443151973850}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0627a010bb192484189f1bc144c9dd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 1370883806981575438}
   level: {fileID: 7447197055324983483}
 --- !u!114 &3887019886440913917
 MonoBehaviour:
