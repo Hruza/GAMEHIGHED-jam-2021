@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  canBuildOn: 1
   interaction: 0
   type: 1
 --- !u!1 &2797272239080507027
@@ -196,7 +197,7 @@ GameObject:
   - component: {fileID: 2797272239080507026}
   - component: {fileID: 2797272239080507029}
   m_Layer: 0
-  m_Name: Level0
+  m_Name: Level0-tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  canBuildOn: 1
   interaction: 0
   type: 1
 --- !u!1001 &1835966127615111340
@@ -709,6 +711,10 @@ PrefabInstance:
     - target: {fileID: 498615287365599551, guid: 75fa2565bc2cf22438b6108b3ef9e32b, type: 3}
       propertyPath: m_Name
       value: TriggerTile1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676789210121281170, guid: 75fa2565bc2cf22438b6108b3ef9e32b, type: 3}
+      propertyPath: canBuildOn
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3676789210121281170, guid: 75fa2565bc2cf22438b6108b3ef9e32b, type: 3}
       propertyPath: onStepTrigger.m_PersistentCalls.m_Calls.Array.size

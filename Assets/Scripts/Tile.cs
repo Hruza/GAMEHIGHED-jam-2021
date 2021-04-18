@@ -8,6 +8,8 @@ public class Tile : MonoBehaviour
 
     public enum Interaction{none, tree, destroyable}
 
+    public bool canBuildOn=true;
+
     public Interaction interaction;
     public Grid.TileType type = Grid.TileType.tile;
 
