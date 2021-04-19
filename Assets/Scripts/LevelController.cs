@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
@@ -36,7 +34,7 @@ public class LevelController : MonoBehaviour
     private Level currentLevel;
     private int[] progress;
 
-    public List<PlayerPrefabs> playerPrefabs;
+    public List<PlayerObjectPrefabs> playerPrefabs;
 
     private GameObject[] levelTiles;
 
@@ -45,7 +43,7 @@ public class LevelController : MonoBehaviour
     private bool showingPauseMenu;
 
     [System.Serializable]
-    public struct PlayerPrefabs
+    public struct PlayerObjectPrefabs
     {
         public GameObject player;
         public Ability ability;
@@ -151,7 +149,7 @@ public class LevelController : MonoBehaviour
 
         GameObject playerObject = null;
 
-        foreach (PlayerPrefabs playerPrefab in playerPrefabs)
+        foreach (PlayerObjectPrefabs playerPrefab in playerPrefabs)
         {
             if (playerPrefab.ability == ability)
             {
@@ -267,6 +265,7 @@ public class LevelController : MonoBehaviour
         LevelEnd(starCount);
     }
 
+/*
     public int[] LoadProgress(string filePath = "saves/progress.dat")
     {
         int[] result = new int[levels.Count];
@@ -312,6 +311,26 @@ public class LevelController : MonoBehaviour
         finally
         {
             fs.Close();
+        }
+    }
+    */
+
+    public int[] LoadProgress(string filePath = "saves/progress.dat")
+    {
+        int[] result = new int[levels.Count];
+        for (var i = 0; i < levels.Count; i++)
+        {
+            if(PlayerPrefs.HasKey("lvl"+i.ToString()))
+            result[i] = PlayerPrefs.GetInt("lvl"+i.ToString());
+        }
+        return result;
+    }
+
+    public void SaveProgress()
+    {
+        for (var i = 0; i < levels.Count; i++)
+        {
+            PlayerPrefs.SetInt("lvl"+i.ToString(),progress[i]);
         }
     }
 }

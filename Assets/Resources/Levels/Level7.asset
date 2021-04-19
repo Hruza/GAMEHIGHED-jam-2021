@@ -18,7 +18,7 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: d500e0402ecc9a145917c6eb6c399fcd, type: 2}
   - count: 2
     ability: {fileID: 11400000, guid: 4b19a8fc6e039dc4f82ecbdd51e0b8b3, type: 2}
-  - count: 1
+  - count: 2
     ability: {fileID: 11400000, guid: ff821361efabeb743849e0b9cce6fd76, type: 2}
   grid: {fileID: 2797272239080507027, guid: baa30447d3b812941af8cfd60e0582cd, type: 3}
   goal: 0
